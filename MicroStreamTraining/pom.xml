@@ -48,8 +48,36 @@
 			<id>vaadin-addons</id>
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
+		<repository>
+			<id>microstream-maven-releases</id>
+			<url>https://repo.microstream.one/repository/maven-releases/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>microstream-maven-snapshots</id>
+			<url>https://repo.microstream.one/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<dependencies>
+
+		<!-- MicroStream -->
+		<dependency>
+			<groupId>one.microstream</groupId>
+			<artifactId>storage.embedded</artifactId>
+			<version>01.00.00-MS-RC1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.xdev-software</groupId>
 			<artifactId>xdev-server-core</artifactId>
