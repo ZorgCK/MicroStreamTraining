@@ -3,12 +3,35 @@
 
 <?xdevuiml version="1.0"?>
 <?template BROWSER_XGA?>
+<?import com.xdev.ui.XdevButton?>
 <?import com.xdev.ui.XdevGridLayout?>
+<?import com.xdev.ui.XdevLabel?>
+<?import com.xdev.ui.XdevTextField?>
 <?import com.xdev.ui.XdevView?>
 <XdevView xmlns:x="http://xml.xdev-software.com/xdevuiml" x:name="MainView">
     <x:constraints zpos="0" width="100%" height="100%" />
     <XdevGridLayout x:name="gridLayout">
         <x:constraints zpos="0" width="100%" height="100%" />
+        <XdevButton caption="Speichern" x:name="btnSave">
+            <x:constraints gridx="1" gridy="1" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
+            <x:event>click.buttonClick</x:event>
+        </XdevButton>
+        <XdevButton caption="Laden" x:name="btnLoad">
+            <x:constraints gridx="2" gridy="1" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
+            <x:event>click.buttonClick</x:event>
+        </XdevButton>
+        <XdevTextField columns="5" x:name="txtFirstname">
+            <x:constraints gridx="1" gridy="2" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
+        </XdevTextField>
+        <XdevLabel x:name="lblFirstname" value="Label">
+            <x:constraints gridx="2" gridy="2" weighty="0.0" weightx="0.1" width="0px" alignment="MIDDLE_LEFT" height="0px" />
+        </XdevLabel>
+        <XdevTextField columns="5" x:name="txtLastname">
+            <x:constraints gridx="1" gridy="3" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
+        </XdevTextField>
+        <XdevLabel x:name="lblLastname" value="Label">
+            <x:constraints gridx="2" gridy="3" weighty="0.0" weightx="0.1" width="0px" alignment="MIDDLE_LEFT" height="0px" />
+        </XdevLabel>
     </XdevGridLayout>
 </XdevView>
 
