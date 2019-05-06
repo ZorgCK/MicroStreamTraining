@@ -8,6 +8,10 @@
 <?import com.xdev.ui.XdevLabel?>
 <?import com.xdev.ui.XdevTextField?>
 <?import com.xdev.ui.XdevView?>
+<?import com.xdev.ui.entitycomponent.table.XdevTable?>
+<?import java.lang.Integer?>
+<?import java.lang.String?>
+<?import one.microstream.microstreamtraining.entities.Customer?>
 <XdevView xmlns:x="http://xml.xdev-software.com/xdevuiml" x:name="MainView">
     <x:constraints zpos="0" width="100%" height="100%" />
     <XdevGridLayout x:name="gridLayout">
@@ -20,18 +24,35 @@
             <x:constraints gridx="2" gridy="1" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
             <x:event>click.buttonClick</x:event>
         </XdevButton>
-        <XdevTextField columns="5" x:name="txtFirstname">
+        <XdevTextField columns="5" caption="ID" x:name="textField">
             <x:constraints gridx="1" gridy="2" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
         </XdevTextField>
-        <XdevLabel x:name="lblFirstname" value="Label">
+        <XdevLabel x:name="lblID" value="Label">
             <x:constraints gridx="2" gridy="2" weighty="0.0" weightx="0.1" width="0px" alignment="MIDDLE_LEFT" height="0px" />
         </XdevLabel>
-        <XdevTextField columns="5" x:name="txtLastname">
+        <XdevTextField columns="5" caption="Firstname" x:name="txtFirstname">
             <x:constraints gridx="1" gridy="3" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
         </XdevTextField>
-        <XdevLabel x:name="lblLastname" value="Label">
+        <XdevLabel x:name="lblFirstname" value="Label">
             <x:constraints gridx="2" gridy="3" weighty="0.0" weightx="0.1" width="0px" alignment="MIDDLE_LEFT" height="0px" />
         </XdevLabel>
+        <XdevTextField columns="5" caption="Lastname" x:name="txtLastname">
+            <x:constraints gridx="1" gridy="4" weighty="0.0" weightx="0.1" width="100%" height="-1px" />
+        </XdevTextField>
+        <XdevLabel x:name="lblLastname" value="Label">
+            <x:constraints gridx="2" gridy="4" weighty="0.0" weightx="0.1" width="0px" alignment="MIDDLE_LEFT" height="0px" />
+        </XdevLabel>
+        <XdevTable x:name="table" x:entity="Customer">
+            <x:entityProperties>
+                <entry type="Integer" property="id" />
+                <entry type="String" property="firstname" />
+                <entry type="String" property="lastname" />
+            </x:entityProperties>
+            <x:constraints gridx="1" gridy="5" weighty="1.0" weightx="0.1" width="100%" height="100%" />
+            <x:typeArguments>
+                <typeArgument type="Customer" />
+            </x:typeArguments>
+        </XdevTable>
     </XdevGridLayout>
 </XdevView>
 

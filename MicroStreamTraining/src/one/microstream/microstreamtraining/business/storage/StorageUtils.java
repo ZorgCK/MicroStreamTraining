@@ -16,7 +16,7 @@ public class StorageUtils {
 	public static final Reference<DataRoot> ROOT = X.Reference(new DataRoot());
 	public static final EmbeddedStorageManager STORAGE;
 	public static final EmbeddedStorageFoundation<?> FOUNDATION;
-
+	public final static File incrementalBackup = new File("C:/MicroStreamTraining/IncrementalBackup");
 	static {
 		final Builder<?> configurationBuilder = Storage.ConfigurationBuilder()
 				.setStorageFileProvider(Storage.FileProvider(new File("C:/MicroStreamTraining")))
@@ -25,6 +25,5 @@ public class StorageUtils {
 
 		FOUNDATION = EmbeddedStorage.Foundation(configurationBuilder.createConfiguration());
 		STORAGE = FOUNDATION.createEmbeddedStorageManager(ROOT).start();
-
 	}
 }

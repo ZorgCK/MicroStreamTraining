@@ -1,6 +1,9 @@
 package one.microstream.microstreamtraining.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import one.microstream.microstreamtraining.business.storage.StorageUtils;
 
 public class DataRoot {
 
@@ -11,6 +14,10 @@ public class DataRoot {
 	}
 
 	public List<Customer> getCustomers() {
+		if (this.customers == null) {
+			this.customers = new ArrayList<>();
+			StorageUtils.STORAGE.store(this);
+		}
 		return this.customers;
 	}
 

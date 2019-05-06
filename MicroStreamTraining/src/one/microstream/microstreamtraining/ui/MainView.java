@@ -3,12 +3,12 @@ package one.microstream.microstreamtraining.ui;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
 import com.xdev.ui.XdevButton;
 import com.xdev.ui.XdevGridLayout;
 import com.xdev.ui.XdevLabel;
 import com.xdev.ui.XdevTextField;
 import com.xdev.ui.XdevView;
+import com.xdev.ui.entitycomponent.table.XdevTable;
 
 import one.microstream.microstreamtraining.dal.CustomerDAO;
 import one.microstream.microstreamtraining.entities.Customer;
@@ -21,6 +21,8 @@ public class MainView extends XdevView {
 	public MainView() {
 		super();
 		this.initUI();
+		
+		this.table.getBeanContainerDataSource().addAll(CustomerDAO.findAll());
 	}
 
 	/**
@@ -31,6 +33,7 @@ public class MainView extends XdevView {
 	 */
 	private void btnSave_buttonClick(final Button.ClickEvent event) {
 		final Customer customer = new Customer();
+		customer.setId(Integer.valueOf(this.textField.getValue()));
 		customer.setFirstname(this.txtFirstname.getValue());
 		customer.setLastname(this.txtLastname.getValue());
 		
@@ -47,6 +50,7 @@ public class MainView extends XdevView {
 		final Customer customer = CustomerDAO.find(5);
 		this.lblFirstname.setValue(customer.getFirstname());
 		this.lblLastname.setValue(customer.getLastname());
+		this.lblID.setValue(String.valueOf(customer.getId()));
 	}
 
 	/*
@@ -58,42 +62,56 @@ public class MainView extends XdevView {
 		this.gridLayout = new XdevGridLayout();
 		this.btnSave = new XdevButton();
 		this.btnLoad = new XdevButton();
+		this.textField = new XdevTextField();
+		this.lblID = new XdevLabel();
 		this.txtFirstname = new XdevTextField();
 		this.lblFirstname = new XdevLabel();
 		this.txtLastname = new XdevTextField();
 		this.lblLastname = new XdevLabel();
+		this.table = new XdevTable<>();
 	
 		this.btnSave.setCaption("Speichern");
 		this.btnLoad.setCaption("Laden");
+		this.textField.setCaption("ID");
+		this.lblID.setValue("Label");
+		this.txtFirstname.setCaption("Firstname");
 		this.lblFirstname.setValue("Label");
+		this.txtLastname.setCaption("Lastname");
 		this.lblLastname.setValue("Label");
+		this.table.setContainerDataSource(Customer.class, false);
+		this.table.setVisibleColumns("id", "firstname", "lastname");
 	
 		this.gridLayout.setColumns(2);
-		this.gridLayout.setRows(4);
+		this.gridLayout.setRows(5);
 		this.btnSave.setWidth(100, Unit.PERCENTAGE);
 		this.btnSave.setHeight(-1, Unit.PIXELS);
 		this.gridLayout.addComponent(this.btnSave, 0, 0);
 		this.btnLoad.setWidth(100, Unit.PERCENTAGE);
 		this.btnLoad.setHeight(-1, Unit.PIXELS);
 		this.gridLayout.addComponent(this.btnLoad, 1, 0);
+		this.textField.setWidth(100, Unit.PERCENTAGE);
+		this.textField.setHeight(-1, Unit.PIXELS);
+		this.gridLayout.addComponent(this.textField, 0, 1);
+		this.lblID.setSizeUndefined();
+		this.gridLayout.addComponent(this.lblID, 1, 1);
+		this.gridLayout.setComponentAlignment(this.lblID, Alignment.MIDDLE_LEFT);
 		this.txtFirstname.setWidth(100, Unit.PERCENTAGE);
 		this.txtFirstname.setHeight(-1, Unit.PIXELS);
-		this.gridLayout.addComponent(this.txtFirstname, 0, 1);
+		this.gridLayout.addComponent(this.txtFirstname, 0, 2);
 		this.lblFirstname.setSizeUndefined();
-		this.gridLayout.addComponent(this.lblFirstname, 1, 1);
+		this.gridLayout.addComponent(this.lblFirstname, 1, 2);
 		this.gridLayout.setComponentAlignment(this.lblFirstname, Alignment.MIDDLE_LEFT);
 		this.txtLastname.setWidth(100, Unit.PERCENTAGE);
 		this.txtLastname.setHeight(-1, Unit.PIXELS);
-		this.gridLayout.addComponent(this.txtLastname, 0, 2);
+		this.gridLayout.addComponent(this.txtLastname, 0, 3);
 		this.lblLastname.setSizeUndefined();
-		this.gridLayout.addComponent(this.lblLastname, 1, 2);
+		this.gridLayout.addComponent(this.lblLastname, 1, 3);
 		this.gridLayout.setComponentAlignment(this.lblLastname, Alignment.MIDDLE_LEFT);
+		this.table.setSizeFull();
+		this.gridLayout.addComponent(this.table, 0, 4);
 		this.gridLayout.setColumnExpandRatio(0, 10.0F);
 		this.gridLayout.setColumnExpandRatio(1, 10.0F);
-		final CustomComponent gridLayout_vSpacer = new CustomComponent();
-		gridLayout_vSpacer.setSizeFull();
-		this.gridLayout.addComponent(gridLayout_vSpacer, 0, 3, 1, 3);
-		this.gridLayout.setRowExpandRatio(3, 1.0F);
+		this.gridLayout.setRowExpandRatio(4, 100.0F);
 		this.gridLayout.setSizeFull();
 		this.setContent(this.gridLayout);
 		this.setSizeFull();
@@ -104,9 +122,10 @@ public class MainView extends XdevView {
 
 	// <generated-code name="variables">
 	private XdevButton btnSave, btnLoad;
-	private XdevLabel lblFirstname, lblLastname;
+	private XdevLabel lblID, lblFirstname, lblLastname;
+	private XdevTable<Customer> table;
 	private XdevGridLayout gridLayout;
-	private XdevTextField txtFirstname, txtLastname;
+	private XdevTextField textField, txtFirstname, txtLastname;
 	// </generated-code>
 
 }

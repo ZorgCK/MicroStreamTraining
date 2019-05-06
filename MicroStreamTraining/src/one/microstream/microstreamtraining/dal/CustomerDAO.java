@@ -12,7 +12,8 @@ public class CustomerDAO {
 	}
 	
 	public static Customer find(final Integer id) {
-		return null;
+		return findAll().stream()
+				.filter(c -> c.getId() == id).findAny().get();
 	}
 	
 	public static void insert(final Customer customer) {
