@@ -4,6 +4,7 @@ import java.io.File;
 
 import one.microstream.X;
 import one.microstream.microstreamtraining.entities.DataRoot;
+import one.microstream.persistence.lazy.LazyReferenceManager;
 import one.microstream.reference.Reference;
 import one.microstream.storage.types.EmbeddedStorage;
 import one.microstream.storage.types.EmbeddedStorageFoundation;
@@ -22,8 +23,10 @@ public class StorageUtils {
 				.setStorageFileProvider(Storage.FileProvider(new File("C:/MicroStreamTraining")))
 				.setBackupSetup(Storage.BackupSetup("C:/MicroStreamTraining/Backup"))
 				.setChannelCountProvider(Storage.ChannelCountProvider(4));
-
+				
 		FOUNDATION = EmbeddedStorage.Foundation(configurationBuilder.createConfiguration());
 		STORAGE = FOUNDATION.createEmbeddedStorageManager(ROOT).start();
+		
+		LazyReferenceManager.set(LazyReferenceManager.New(10*60*1000)).start();
 	}
 }
