@@ -2,7 +2,7 @@ package one.microstream.microstreamtraining.entities;
 
 public class Customer {
 
-//	private Integer id;
+	private Integer id;
 	private String lastname;
 	private String firstname;
 //	private String mail;
@@ -19,5 +19,11 @@ public class Customer {
 	}
 	public void setFirstname(final String firstname) {
 		this.firstname = firstname;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

@@ -1,18 +1,20 @@
 package one.microstream.microstreamtraining.entities;
 
+import java.util.List;
+
 public class DataRoot {
 
-	private Customer customer;
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(final Customer customer) {
-		this.customer = customer;
-	}
+	private List<Customer> customers;
 
 	public DataRoot() {
 		super();
+	}
+
+	public List<Customer> getCustomers() {
+		return this.customers;
+	}
+
+	public void setCustomers(final List<Customer> customers) {
+		this.customers = customers;
 	}
 }

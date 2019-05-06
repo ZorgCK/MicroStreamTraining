@@ -10,7 +10,7 @@ import com.xdev.ui.XdevLabel;
 import com.xdev.ui.XdevTextField;
 import com.xdev.ui.XdevView;
 
-import one.microstream.microstreamtraining.business.storage.StorageUtils;
+import one.microstream.microstreamtraining.dal.CustomerDAO;
 import one.microstream.microstreamtraining.entities.Customer;
 
 public class MainView extends XdevView {
@@ -34,8 +34,7 @@ public class MainView extends XdevView {
 		customer.setFirstname(this.txtFirstname.getValue());
 		customer.setLastname(this.txtLastname.getValue());
 		
-		StorageUtils.ROOT.get().setCustomer(customer);
-		StorageUtils.STORAGE.store(StorageUtils.ROOT.get());
+		CustomerDAO.insert(customer);
 	}
 
 	/**
@@ -45,7 +44,7 @@ public class MainView extends XdevView {
 	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
 	 */
 	private void btnLoad_buttonClick(final Button.ClickEvent event) {
-		final Customer customer = StorageUtils.ROOT.get().getCustomer();
+		final Customer customer = CustomerDAO.find(5);
 		this.lblFirstname.setValue(customer.getFirstname());
 		this.lblLastname.setValue(customer.getLastname());
 	}
