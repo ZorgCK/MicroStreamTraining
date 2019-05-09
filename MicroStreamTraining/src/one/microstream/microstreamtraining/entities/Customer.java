@@ -5,7 +5,7 @@ public class Customer {
 	private Integer id;
 	private String lastname;
 	private String firstname;
-//	private String mail;
+	private String mail;
 //	private final LocalDateTime created = LocalDateTime.now();
 	
 	public String getLastname() {
@@ -21,9 +21,15 @@ public class Customer {
 		this.firstname = firstname;
 	}
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
+	}
+	public String getMail() {
+		return this.mail;
+	}
+	public void setMail(final String mail) {
+		this.mail = mail;
 	}
 }

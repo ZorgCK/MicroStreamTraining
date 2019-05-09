@@ -1,14 +1,11 @@
 
 package one.microstream.microstreamtraining.ui;
 
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
 import com.xdev.ui.XdevButton;
 import com.xdev.ui.XdevGridLayout;
-import com.xdev.ui.XdevLabel;
-import com.xdev.ui.XdevTextField;
 import com.xdev.ui.XdevView;
+import com.xdev.ui.entitycomponent.table.XdevTable;
 
 import one.microstream.microstreamtraining.dal.CustomerDAO;
 import one.microstream.microstreamtraining.entities.Customer;
@@ -31,9 +28,10 @@ public class MainView extends XdevView {
 	 */
 	private void btnSave_buttonClick(final Button.ClickEvent event) {
 		final Customer customer = new Customer();
-		customer.setFirstname(this.txtFirstname.getValue());
-		customer.setLastname(this.txtLastname.getValue());
-		
+		customer.setFirstname("Christian");
+		customer.setLastname("Kümmel");
+		customer.setId(10);
+		customer.setMail("c.kuemmel@xdev-software.de");
 		CustomerDAO.insert(customer);
 	}
 
@@ -44,9 +42,7 @@ public class MainView extends XdevView {
 	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
 	 */
 	private void btnLoad_buttonClick(final Button.ClickEvent event) {
-		final Customer customer = CustomerDAO.find(5);
-		this.lblFirstname.setValue(customer.getFirstname());
-		this.lblLastname.setValue(customer.getLastname());
+		this.table.getBeanContainerDataSource().addAll(CustomerDAO.findAll());
 	}
 
 	/*
@@ -58,42 +54,25 @@ public class MainView extends XdevView {
 		this.gridLayout = new XdevGridLayout();
 		this.btnSave = new XdevButton();
 		this.btnLoad = new XdevButton();
-		this.txtFirstname = new XdevTextField();
-		this.lblFirstname = new XdevLabel();
-		this.txtLastname = new XdevTextField();
-		this.lblLastname = new XdevLabel();
+		this.table = new XdevTable<>();
 	
-		this.btnSave.setCaption("Speichern");
+		this.btnSave.setCaption("Erzeugen");
 		this.btnLoad.setCaption("Laden");
-		this.lblFirstname.setValue("Label");
-		this.lblLastname.setValue("Label");
+		this.table.setContainerDataSource(Customer.class, false);
+		this.table.setVisibleColumns("firstname", "id", "lastname", "mail");
 	
-		this.gridLayout.setColumns(2);
-		this.gridLayout.setRows(4);
+		this.gridLayout.setColumns(1);
+		this.gridLayout.setRows(3);
 		this.btnSave.setWidth(100, Unit.PERCENTAGE);
 		this.btnSave.setHeight(-1, Unit.PIXELS);
 		this.gridLayout.addComponent(this.btnSave, 0, 0);
 		this.btnLoad.setWidth(100, Unit.PERCENTAGE);
 		this.btnLoad.setHeight(-1, Unit.PIXELS);
-		this.gridLayout.addComponent(this.btnLoad, 1, 0);
-		this.txtFirstname.setWidth(100, Unit.PERCENTAGE);
-		this.txtFirstname.setHeight(-1, Unit.PIXELS);
-		this.gridLayout.addComponent(this.txtFirstname, 0, 1);
-		this.lblFirstname.setSizeUndefined();
-		this.gridLayout.addComponent(this.lblFirstname, 1, 1);
-		this.gridLayout.setComponentAlignment(this.lblFirstname, Alignment.MIDDLE_LEFT);
-		this.txtLastname.setWidth(100, Unit.PERCENTAGE);
-		this.txtLastname.setHeight(-1, Unit.PIXELS);
-		this.gridLayout.addComponent(this.txtLastname, 0, 2);
-		this.lblLastname.setSizeUndefined();
-		this.gridLayout.addComponent(this.lblLastname, 1, 2);
-		this.gridLayout.setComponentAlignment(this.lblLastname, Alignment.MIDDLE_LEFT);
+		this.gridLayout.addComponent(this.btnLoad, 0, 1);
+		this.table.setSizeFull();
+		this.gridLayout.addComponent(this.table, 0, 2);
 		this.gridLayout.setColumnExpandRatio(0, 10.0F);
-		this.gridLayout.setColumnExpandRatio(1, 10.0F);
-		final CustomComponent gridLayout_vSpacer = new CustomComponent();
-		gridLayout_vSpacer.setSizeFull();
-		this.gridLayout.addComponent(gridLayout_vSpacer, 0, 3, 1, 3);
-		this.gridLayout.setRowExpandRatio(3, 1.0F);
+		this.gridLayout.setRowExpandRatio(2, 100.0F);
 		this.gridLayout.setSizeFull();
 		this.setContent(this.gridLayout);
 		this.setSizeFull();
@@ -104,9 +83,8 @@ public class MainView extends XdevView {
 
 	// <generated-code name="variables">
 	private XdevButton btnSave, btnLoad;
-	private XdevLabel lblFirstname, lblLastname;
+	private XdevTable<Customer> table;
 	private XdevGridLayout gridLayout;
-	private XdevTextField txtFirstname, txtLastname;
 	// </generated-code>
 
 }
